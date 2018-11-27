@@ -4,50 +4,16 @@ const Hash = {
         let items = this.items;
         let i = 0;
 
-        $.getJSON("cart.json", (data) => {
+        $.getJSON("js/cart.json", (data) => {
 
             this.drawItems(data, items);
+            this.onChangeSelect(data, "#selectFilter")
 
-            $('#selectFilter ').on('change', () => {
-                items = [];
-                let newData = data;
-                let i = 0;
-
-                const optionValue = $("#selectFilter").find(":selected").val();
-                if (optionValue !== 'all') {
-                    newData = data.filter((i) => {
-                        return i.category === optionValue;
-                    });
-                }
-
-                this.drawItems(newData, items);
-                this.clearItems();
-                this.filterByItem(items, i);
-
-            });
         }).done(() => {
 
             this.filterByItem(items, i);
+            this.drawArrows("#nextArrow", "#prevArrow", i)
 
-            $("#nextArrow").on('click', () => {
-                $('#app').html("");
-                i++;
-                if (i > items.length - 1) {
-                    i = 0;
-                }
-                this.filterByItem(items, i);
-
-            });
-            $("#prevArrow").on('click', () => {
-                $('#app').html("");
-                i--;
-                if (i === -1) {
-                    i = items.length - 1;
-                }
-
-                this.filterByItem(items, i);
-
-            });
         });
     },
     filterByItem: function (data, i) {
@@ -64,6 +30,46 @@ const Hash = {
                                  <p>Category: ${val.category}</p> 
                                  <p>Description: ${val.description}</p> 
                         </div>`);
+        });
+    },
+    drawArrows: function (next, prev, i) {
+        $(next).on('click', () => {
+            $('#app').html("");
+            i++;
+            if (i > this.items.length - 1) {
+                i = 0;
+            }
+            this.filterByItem(this.items, i);
+
+        });
+        $(prev).on('click', () => {
+            $('#app').html("");
+            i--;
+            if (i === -1) {
+                i = this.items.length - 1;
+            }
+
+            this.filterByItem(this.items, i);
+
+        });
+    },
+    onChangeSelect: function (data, select) {
+        $(select).on('change', () => {
+            this.items = [];
+            let newData = data;
+            let i = 0;
+
+            const optionValue = $("#selectFilter").find(":selected").val();
+            if (optionValue !== 'all') {
+                newData = data.filter((i) => {
+                    return i.category === optionValue;
+                });
+            }
+
+            this.drawItems(newData, this.items);
+            this.clearItems();
+            this.filterByItem(this.items, i);
+            this.drawArrows("#nextArrow", "#prevArrow", i)
         });
     }
 };
