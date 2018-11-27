@@ -1,0 +1,85 @@
+body{
+    height: 100%;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+main {
+    margin: 0 auto;
+}
+
+h1 {
+    cursor: pointer;
+    font-size: 37px;
+    text-transform: uppercase;
+    color: #212121;
+}
+
+h1:hover .letter {
+    opacity: 1;
+}
+
+.letter {
+    color: #212121;
+    font-size: 37px;
+    opacity: 0;
+    display: inline;
+
+    -webkit-transition: opacity 0.3s;
+    -moz-transition: opacity 0.3s;
+    -ms-transition: opacity 0.3s;
+    -o-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+}
+h1 span {
+    display: block;
+    font-size: 17px;
+    text-transform: capitalize;
+}
+
+#app {
+    width: 800px;
+    height: 400px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.wrapper {
+    margin: 0 auto;
+    position: relative;
+    height: 800px;
+    width: 50%;
+    text-align: center;
+}
+
+img {
+    width: 100%;
+}
+
+#nextArrow,
+#prevArrow {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    color: #212121;
+    text-align: center;
+    cursor: pointer;
+    top: 300px;
+}
+
+#nextArrow {
+    right: 20px;
+}
+
+#prevArrow {
+    left: 20px;
+}
+
+select {
+    font-size: 20px;
+    width: 300px;
+    height: 40px;
+    border-radius: 5px 5px;
+    margin-bottom: 20px;
+    padding-left: 5px;
+}
